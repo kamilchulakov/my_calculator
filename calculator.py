@@ -3,6 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import *
 import math
 
+
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -36,7 +37,6 @@ class Example(QMainWindow):
         self.bdel.clicked.connect(lambda: self.write(symbol='/'))
         self.bscl.clicked.connect(lambda: self.write(symbol='('))
         self.bscr.clicked.connect(lambda: self.write(symbol=')'))
-
 
     def write(self, symbol='0'):
         self.label.setText(self.label.text() + symbol)
