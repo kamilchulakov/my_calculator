@@ -5,6 +5,23 @@ from math import *
 
 
 class Calculation:
+    def main(self, line):
+        while '(' in line:
+            try:
+                if line.count(')') != line.count('('):
+                    raise Exception
+                ind_l = line.rindex('(')
+                ind_r = line.index(')', ind_l)
+                if ind_r - ind_l == 1:
+                    raise Exception
+                elif line[ind_l-1].isdigit():
+                    print(line[ind_r+1], line[ind_r+1].isdigit())
+                    raise Exception
+            except Exception:
+                return 'Error'
+            line = line[:ind_l] + self.calculate(line[ind_l+1:ind_r]) + line[ind_r+1:] #по скобкам преобразуем выражения
+        return self.calculate(line)
+
     def findx(self, line, ind):
         num_1 = ''
         for k in range(ind):
@@ -126,8 +143,7 @@ class Example(QMainWindow):
         primer = self.label.text()
         a = Calculation()
         self.clear()
-        self.label.setText(a.calculate(primer))
-
+        self.label.setText(a.main(primer))
 
     def clear(self):
         self.label.setText('')
@@ -138,4 +154,3 @@ if __name__ == '__main__':
     ex = Example()
     ex.show()
     sys.exit(app.exec_())
-
