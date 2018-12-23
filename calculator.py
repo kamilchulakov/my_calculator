@@ -32,17 +32,21 @@ class Calculation:
         if len(line) <= 1:
             raise Exception
         small_operations = ['sin', 'cos', 'tg', 'ctg', 'log']
+        for i in small_operations:
+            while i in line:
+                base = line.rindex(i) + len(i) - 1
+                num_1, n1 = self.findy(line, base)
+                num_1 = float(num_1)
+                line = line[:line.rindex(i)] + self.small_operations(num_1, i) + line[n1+1:]
         big_operations = '√ / x + - ^'.split(' ')
         for i in big_operations:
-            while i in line:
+            while i in line and (i != '-' and i != line[0]):
                 base = line.rindex(i)
                 num_1, n1 = self.findx(line, base)
                 num_2, n2 = self.findy(line, base)
-                print(line[:n1])
                 num_1 = float(num_1)
                 num_2 = float(num_2)
-                line = line[:n1] + str(self.big_operations(num_1, num_2, i)) + line[n2+1:]
-                print(line)
+                line = line[:n1] + self.big_operations(num_1, num_2, i) + line[n2+1:]
         return line
 
     def big_operations(self, num1, num2, operation):
@@ -58,19 +62,22 @@ class Calculation:
             res = num1 ** num2
         elif operation == '√':
             res = num2 ** (1 / num1)
-        return res
+        return str(res)
 
     def small_operations(self, num1, operation):
         if operation == 'sin':
             res = sin(num1)
         elif operation == 'cos':
-            res = num1
+            res = cos(num1)
         elif operation == 'tg':
             res = tan(num1)
         elif operation == 'ctg':
             res = 1 / tan(num1)
         elif operation == 'log':
             res = log(num1)
+        res = str(res)
+        if len(res) > 5:
+            res = res[:5]
         return res
 
 
