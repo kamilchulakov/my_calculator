@@ -1,42 +1,77 @@
 import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
-import math
+from math import *
 
 
-def calculate(line):
-    operations = set(list('/x+-'))
-    n1 = 0
-    n2 = 2
-    if len(line) <= 2:
-        raise Exception
-    for i in operations:
-        while i in line:
-            base = line.rindex(i)
-            num_1 = ''
-            num_2 = ''
-            for j in range(base + 1, len(line)):
-                if line[j].isdigit():
-                    num_2 += line[j]
-                else:
-                    n2 = j
-                    break
-            line = line[::-1]
-            base -= len(line)
-            base *= - 1
-            for k in range(base, len(line)):
-                if line[k].isdigit():
-                    num_1 += line[k]
-                else:
-                    num_1 = num_1[::-1]
-                    n1 = k
-                    break
-            line = line[::-1]
+class Calculation:
+    def findx(self, line, ind):
+        num_1 = ''
+        for k in range(ind):
+            if line[ind-1-k].isdigit():
+                num_1 += line[ind-1-k]
+            else:
+                break
+        num_1 = num_1[::-1]
+        n1 = ind - 1 - k
+        if not line[n1].isdigit():
+            n1 += 1
+        return num_1, n1
 
+    def findy(self, line, ind):
+        num_2 = ''
+        for j in range(ind + 1, len(line)):
+            if line[j].isdigit() or line[j] == '.':
+                num_2 += line[j]
+            else:
+                break
+        n2 = j
+        return num_2, n2
 
-def cut(obj, ind_1, ind_2):
-    obj = obj[:ind_1] + calculate(obj[ind_1:ind_2]) + obj[ind_2+1:]
-    return ''.join(obj)
+    def calculate(self, line):
+        if len(line) <= 1:
+            raise Exception
+        small_operations = ['sin', 'cos', 'tg', 'ctg', 'log']
+        big_operations = '√ / x + - ^'.split(' ')
+        for i in big_operations:
+            while i in line:
+                base = line.rindex(i)
+                num_1, n1 = self.findx(line, base)
+                num_2, n2 = self.findy(line, base)
+                print(line[:n1])
+                num_1 = float(num_1)
+                num_2 = float(num_2)
+                line = line[:n1] + str(self.big_operations(num_1, num_2, i)) + line[n2+1:]
+                print(line)
+        return line
+
+    def big_operations(self, num1, num2, operation):
+        if operation == 'x':
+            res = num1 * num2
+        elif operation == '-':
+            res = num1 - num2
+        elif operation == '/':
+            res = num1 / num2
+        elif operation == '+':
+            res = num1 + num2
+        elif operation == '^':
+            res = num1 ** num2
+        elif operation == '√':
+            res = num2 ** (1 / num1)
+        return res
+
+    def small_operations(self, num1, operation):
+        if operation == 'sin':
+            res = sin(num1)
+        elif operation == 'cos':
+            res = num1
+        elif operation == 'tg':
+            res = tan(num1)
+        elif operation == 'ctg':
+            res = 1 / tan(num1)
+        elif operation == 'log':
+            res = log(num1)
+        return res
 
 
 class Example(QMainWindow):
@@ -82,19 +117,10 @@ class Example(QMainWindow):
 
     def summary(self):
         primer = self.label.text()
-        while '(' in primer:
-            try:
-                ind_l = primer.rindex('(')
-                ind_r = primer.index(')', ind_l)
-                if ind_r - ind_l == 1:
-                    raise Exception
-                elif primer[ind_l-1].isdigit() or not primer[ind_l+1].isdigit():
-                    raise Exception
-                primer = cut(primer, ind_l, ind_r)
-            except:
-                self.label.setText('Error')
-                primer = ''
-        print(primer)
+        a = Calculation()
+        self.clear()
+        self.label.setText(a.calculate(primer))
+
 
     def clear(self):
         self.label.setText('')
@@ -105,3 +131,4 @@ if __name__ == '__main__':
     ex = Example()
     ex.show()
     sys.exit(app.exec_())
+

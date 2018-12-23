@@ -580,7 +580,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>-&gt;</string>
+     <string>10^</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
@@ -593,7 +593,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;-</string>
+     <string>e</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_5">
