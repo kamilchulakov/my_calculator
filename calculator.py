@@ -27,6 +27,8 @@ class Calculation:
         for k in range(ind):
             if line[ind-1-k].isdigit():
                 num_1 += line[ind-1-k]
+            elif line[ind-1-k] == '.':
+                num_1 += '.'
             else:
                 break
         num_1 = num_1[::-1]
@@ -55,7 +57,7 @@ class Calculation:
                 num_1, n1 = self.findy(line, base)
                 num_1 = float(num_1)
                 line = line[:line.rindex(i)] + self.small_operations(num_1, i) + line[n1+1:]
-        big_operations = '√ / x + - ^'.split(' ')
+        big_operations = '√ / x % + - ^'.split(' ')
         for i in big_operations:
             while i in line and (i != '-' and i != line[0]):
                 base = line.rindex(i)
@@ -79,6 +81,8 @@ class Calculation:
             res = num1 ** num2
         elif operation == '√':
             res = num2 ** (1 / num1)
+        elif operation == '%':
+            res = (num1 * num2) / 100
         return str(res)
 
     def small_operations(self, num1, operation):
@@ -102,6 +106,7 @@ class Example(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.position = 0
 
     def initUI(self):
         uic.loadUi('calculate.ui', self)
@@ -132,12 +137,26 @@ class Example(QMainWindow):
         self.bscl.clicked.connect(lambda: self.write(symbol='('))
         self.bscr.clicked.connect(lambda: self.write(symbol=')'))
         self.bc.clicked.connect(self.clear)
+        self.bright.clicked.connect(self.change_position_right)
+        self.bleft.clicked.connect(self.change_position_left)
 
     def write(self, symbol='0'):
         if self.label.text() not in ['Error', '0']:
-            self.label.setText(self.label.text() + symbol)
+            now = self.label.text()
+            now = now[:self.position] + symbol + now[self.position:]
+            self.label.setText(now)
+            self.position += 1
         else:
             self.label.setText(symbol)
+            self.position += 1
+
+    def change_position_left(self):
+        if self.position >= 1:
+            self.position -= 1
+
+    def change_position_right(self):
+        if self.position >= 1:
+            self.position += 1
 
     def summary(self):
         primer = self.label.text()

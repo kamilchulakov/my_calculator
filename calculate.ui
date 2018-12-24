@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>403</width>
-    <height>449</height>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>260</y>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -37,7 +37,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>300</y>
+      <y>340</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -56,7 +56,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>340</y>
+      <y>380</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -75,7 +75,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>380</y>
+      <y>420</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -94,7 +94,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>300</y>
+      <y>340</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -113,7 +113,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>340</y>
+      <y>380</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -132,7 +132,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>260</y>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -151,7 +151,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>300</y>
+      <y>340</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -170,7 +170,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>340</y>
+      <y>380</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -189,7 +189,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>260</y>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -208,7 +208,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>380</y>
+      <y>420</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -221,7 +221,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>380</y>
+      <y>420</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -234,7 +234,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>380</y>
+      <y>420</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -247,7 +247,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>380</y>
+      <y>420</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -260,7 +260,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>340</y>
+      <y>380</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -273,7 +273,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>260</y>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -286,7 +286,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>300</y>
+      <y>340</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -299,7 +299,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>300</y>
+      <y>340</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -324,7 +324,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>340</y>
+      <y>380</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -336,8 +336,8 @@
    <widget class="QPushButton" name="bste">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>220</y>
+      <x>160</x>
+      <y>180</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -350,7 +350,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>260</y>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -363,7 +363,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>180</y>
+      <y>220</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -376,7 +376,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>180</y>
+      <y>220</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -389,7 +389,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>180</y>
+      <y>220</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -402,7 +402,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>180</y>
+      <y>220</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -415,7 +415,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>220</y>
+      <y>260</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -424,11 +424,11 @@
      <string>/</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bleft">
+   <widget class="QPushButton" name="bdel_2">
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>220</y>
+      <y>260</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -437,24 +437,24 @@
      <string>DEL</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bce">
+   <widget class="QPushButton" name="bleft">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>220</y>
+      <y>180</y>
       <width>81</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>CE</string>
+     <string>&lt;-</string>
     </property>
    </widget>
    <widget class="QPushButton" name="bc">
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>220</y>
+      <y>260</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -467,7 +467,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>180</y>
+      <y>220</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -544,24 +544,24 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="bright">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>140</y>
+      <x>240</x>
+      <y>180</y>
       <width>81</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>In</string>
+     <string>-&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="bexp">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>140</y>
+      <x>80</x>
+      <y>260</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -570,11 +570,11 @@
      <string>Exp</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="b10">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>140</y>
+      <x>0</x>
+      <y>180</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -583,11 +583,11 @@
      <string>10^</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="be">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>140</y>
+      <x>0</x>
+      <y>260</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -596,11 +596,11 @@
      <string>e</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="bperc">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>140</y>
+      <x>320</x>
+      <y>180</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -635,19 +635,19 @@
    <zorder>btg</zorder>
    <zorder>bctg</zorder>
    <zorder>bdel</zorder>
+   <zorder>bdel_2</zorder>
    <zorder>bleft</zorder>
-   <zorder>bce</zorder>
    <zorder>bc</zorder>
    <zorder>blog</zorder>
    <zorder>label</zorder>
    <zorder>line</zorder>
    <zorder>line_2</zorder>
    <zorder>line_4</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>pushButton_5</zorder>
+   <zorder>bright</zorder>
+   <zorder>bexp</zorder>
+   <zorder>b10</zorder>
+   <zorder>be</zorder>
+   <zorder>bperc</zorder>
    <zorder>line_3</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
