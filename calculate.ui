@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Calculator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="b7">
@@ -609,6 +609,67 @@
      <string>%</string>
     </property>
    </widget>
+   <widget class="QRadioButton" name="radio">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>3</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">radio_group</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radio2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>140</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">radio_group</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radio3">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>140</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>10</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">radio_group</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>120</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сколько показывать знаков после запятой?</string>
+    </property>
+   </widget>
    <zorder>b7</zorder>
    <zorder>b4</zorder>
    <zorder>b1</zorder>
@@ -649,6 +710,10 @@
    <zorder>be</zorder>
    <zorder>bperc</zorder>
    <zorder>line_3</zorder>
+   <zorder>radio</zorder>
+   <zorder>radio2</zorder>
+   <zorder>radio3</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
@@ -656,5 +721,6 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="radio_group"/>
  </buttongroups>
 </ui>

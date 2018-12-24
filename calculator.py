@@ -4,8 +4,34 @@ from PyQt5.QtWidgets import *
 from math import *
 
 
+def my_round(obj, rounding):
+        if '.' in obj:
+            dot = obj.index('.')
+            after = obj[dot:]
+            if len(after) > rounding:
+                obj_copy = str(obj)
+                last_num = obj_copy[dot + rounding]
+                if int(last_num) >= 5:
+                    pred_num = int(obj_copy[dot + rounding-1]) + 1
+                    if pred_num == 10:
+                        pred_num = 0
+                        pred_pred_num = obj_copy[dot + rounding-2]
+                        obj = obj[:dot] + after[:rounding-1] + str(pred_pred_num) + str(pred_num)
+                    else:
+                        obj = obj[:dot] + after[:rounding-1] + str(pred_num)
+                else:
+                    obj = obj[:dot] + after[:rounding]
+        return obj
+
+
+def check_int(obj):
+        if obj == int(obj):
+            return str(int(obj))
+        return str(obj)
+
+
 class Calculation:
-    def main(self, line):
+    def main(self, line, rounding):
         while '(' in line:
             try:
                 if line.count(')') != line.count('('):
@@ -19,8 +45,10 @@ class Calculation:
                     raise Exception
             except Exception:
                 return 'Error'
-            line = line[:ind_l] + self.calculate(line[ind_l+1:ind_r]) + line[ind_r+1:] #по скобкам преобразуем выражения
-        return self.calculate(line)
+            line = line[:ind_l] + self.calculate(line[ind_l+1:ind_r]) + line[ind_r+1:]
+        otv = self.calculate(line)
+        otv = my_round(otv, rounding)
+        return otv
 
     def findx(self, line, ind):
         num_1 = ''
@@ -50,7 +78,7 @@ class Calculation:
     def calculate(self, line):
         if len(line) <= 1:
             raise Exception
-        small_operations = ['sin', 'cos', 'tg', 'ctg', 'log']
+        small_operations = ['sin', 'cos', 'tg', 'ctg', 'log', '!']
         for i in small_operations:
             while i in line:
                 base = line.rindex(i) + len(i) - 1
@@ -59,7 +87,7 @@ class Calculation:
                 line = line[:line.rindex(i)] + self.small_operations(num_1, i) + line[n1+1:]
         big_operations = '√ / x % + - ^'.split(' ')
         for i in big_operations:
-            while i in line and (i != '-' and i != line[0]):
+            while i in line and (i != '-' or i != line[0]):
                 base = line.rindex(i)
                 num_1, n1 = self.findx(line, base)
                 num_2, n2 = self.findy(line, base)
@@ -74,13 +102,13 @@ class Calculation:
         elif operation == '-':
             res = num1 - num2
         elif operation == '/':
+            if num2 == 0:
+                raise Exception
             res = num1 / num2
         elif operation == '+':
             res = num1 + num2
         elif operation == '^':
             res = num1 ** num2
-        elif operation == '√':
-            res = num2 ** (1 / num1)
         elif operation == '%':
             res = (num1 * num2) / 100
         return str(res)
@@ -96,10 +124,11 @@ class Calculation:
             res = 1 / tan(num1)
         elif operation == 'log':
             res = log(num1)
-        res = str(res)
-        if len(res) > 5:
-            res = res[:5]
-        return res
+        elif operation == '√':
+            res = num1 ** 0.5
+        elif operation == '!':
+            res = factorial(num1)
+        return str(res)
 
 
 class Example(QMainWindow):
@@ -139,16 +168,24 @@ class Example(QMainWindow):
         self.bc.clicked.connect(self.clear)
         self.bright.clicked.connect(self.change_position_right)
         self.bleft.clicked.connect(self.change_position_left)
+        self.b10.clicked.connect(lambda: self.write(symbol='10^'))
+        self.bdel_2.clicked.connect(self.delete)
+        self.brzn.clicked.connect(lambda: self.write(symbol='-'))
+        self.radio_group.buttonClicked.connect(self.change_round)
+        self.rounding = 5
 
     def write(self, symbol='0'):
         if self.label.text() not in ['Error', '0']:
             now = self.label.text()
             now = now[:self.position] + symbol + now[self.position:]
             self.label.setText(now)
-            self.position += 1
+            self.position += len(symbol)
         else:
             self.label.setText(symbol)
-            self.position += 1
+            self.position += len(symbol)
+
+    def delete(self):
+        self.label.setText(self.label.text()[:-1])
 
     def change_position_left(self):
         if self.position >= 1:
@@ -162,10 +199,13 @@ class Example(QMainWindow):
         primer = self.label.text()
         a = Calculation()
         self.clear()
-        self.label.setText(a.main(primer))
+        self.label.setText(check_int(float(a.main(primer, self.rounding))))
 
     def clear(self):
         self.label.setText('')
+
+    def change_round(self, button):
+        self.rounding = int(button.text()) + 1
 
 
 if __name__ == '__main__':
