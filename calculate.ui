@@ -557,7 +557,7 @@
      <string>-&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bexp">
+   <widget class="QPushButton" name="bmod">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -567,7 +567,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Exp</string>
+     <string>mod</string>
     </property>
    </widget>
    <widget class="QPushButton" name="b10">
@@ -619,7 +619,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>3</string>
+     <string>0</string>
     </property>
     <attribute name="buttonGroup">
      <string notr="true">radio_group</string>
@@ -662,12 +662,12 @@
      <rect>
       <x>50</x>
       <y>120</y>
-      <width>241</width>
+      <width>281</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Сколько показывать знаков после запятой?</string>
+     <string>Сколько показывать знаков после запятой в ответе?</string>
     </property>
    </widget>
    <zorder>b7</zorder>
@@ -705,7 +705,7 @@
    <zorder>line_2</zorder>
    <zorder>line_4</zorder>
    <zorder>bright</zorder>
-   <zorder>bexp</zorder>
+   <zorder>bmod</zorder>
    <zorder>b10</zorder>
    <zorder>be</zorder>
    <zorder>bperc</zorder>
@@ -720,7 +720,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="radio_group"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

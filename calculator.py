@@ -12,13 +12,13 @@ def my_round(obj, rounding):
                 obj_copy = str(obj)
                 last_num = obj_copy[dot + rounding]
                 if int(last_num) >= 5:
-                    pred_num = int(obj_copy[dot + rounding-1]) + 1
-                    if pred_num == 10:
-                        pred_num = 0
-                        pred_pred_num = obj_copy[dot + rounding-2]
-                        obj = obj[:dot] + after[:rounding-1] + str(pred_pred_num) + str(pred_num)
+                    prev_num = int(obj_copy[dot + rounding-1]) + 1
+                    if prev_num == 10:
+                        prev_num = 0
+                        prev_prev_num = obj_copy[dot + rounding-2]
+                        obj = obj[:dot] + after[:rounding-1] + str(prev_prev_num) + str(prev_num)
                     else:
-                        obj = obj[:dot] + after[:rounding-1] + str(pred_num)
+                        obj = obj[:dot] + after[:rounding-1] + str(prev_num)
                 else:
                     obj = obj[:dot] + after[:rounding]
         return obj
@@ -52,6 +52,7 @@ class Calculation:
 
     def findx(self, line, ind):
         num_1 = ''
+        k = 0
         for k in range(ind):
             if line[ind-1-k].isdigit():
                 num_1 += line[ind-1-k]
@@ -67,53 +68,74 @@ class Calculation:
 
     def findy(self, line, ind):
         num_2 = ''
+        n2 = 0
         for j in range(ind + 1, len(line)):
+            n2 = j
             if line[j].isdigit() or line[j] == '.':
                 num_2 += line[j]
             else:
+                if line[ind:ind+3] == 'mod':
+                    for y in range(ind + 3, len(line)):
+                        n2 = y
+                        if line[y].isdigit() or line[y] == '.':
+                            num_2 += line[y]
                 break
-        n2 = j
         return num_2, n2
 
     def calculate(self, line):
+        done = False
         if len(line) <= 1:
             raise Exception
-        small_operations = ['sin', 'cos', 'tg', 'ctg', 'log', '!']
+        small_operations = ['!', 'sin', 'cos', 'tg', 'ctg', 'log', ]
         for i in small_operations:
             while i in line:
                 base = line.rindex(i) + len(i) - 1
                 num_1, n1 = self.findy(line, base)
                 num_1 = float(num_1)
                 line = line[:line.rindex(i)] + self.small_operations(num_1, i) + line[n1+1:]
-        big_operations = '√ / x % + - ^'.split(' ')
+                done = True
+        big_operations = '^ √ / mod x % + -'.split(' ')
         for i in big_operations:
             while i in line and (i != '-' or i != line[0]):
                 base = line.rindex(i)
                 num_1, n1 = self.findx(line, base)
                 num_2, n2 = self.findy(line, base)
+                if num_1 == '':
+                    return 'Error'
+                if num_2 == '':
+                    return 'Error'
                 num_1 = float(num_1)
                 num_2 = float(num_2)
-                line = line[:n1] + self.big_operations(num_1, num_2, i) + line[n2+1:]
+                result = self.big_operations(num_1, num_2, i)
+                if result == 'Error':
+                    return 'Error'
+                line = line[:n1] + result + line[n2+1:]
+                done = True
+        if not done:
+            line = 'Error'
         return line
 
     def big_operations(self, num1, num2, operation):
+        res = 0
         if operation == 'x':
             res = num1 * num2
         elif operation == '-':
             res = num1 - num2
         elif operation == '/':
             if num2 == 0:
-                raise Exception
-            res = num1 / num2
+                return 'Error'
         elif operation == '+':
             res = num1 + num2
         elif operation == '^':
             res = num1 ** num2
         elif operation == '%':
             res = (num1 * num2) / 100
+        elif operation == 'mod':
+            res = fmod(num1, num2)
         return str(res)
 
     def small_operations(self, num1, operation):
+        res = 0
         if operation == 'sin':
             res = sin(num1)
         elif operation == 'cos':
@@ -136,6 +158,7 @@ class Example(QMainWindow):
         super().__init__()
         self.initUI()
         self.position = 0
+        self.rounding = 5
 
     def initUI(self):
         uic.loadUi('calculate.ui', self)
@@ -157,7 +180,8 @@ class Example(QMainWindow):
         self.bfact.clicked.connect(lambda: self.write(symbol='!'))
         self.bkor.clicked.connect(lambda: self.write(symbol='√'))
         self.blog.clicked.connect(lambda: self.write(symbol='log'))
-        self.bpi.clicked.connect(lambda: self.write(symbol='pi'))
+        self.bpi.clicked.connect(lambda: self.write(symbol=str(pi)))
+        self.be.clicked.connect(lambda: self.write(symbol=str(e)))
         self.brvn.clicked.connect(self.summary)
         self.bste.clicked.connect(lambda: self.write(symbol='^'))
         self.bsum.clicked.connect(lambda: self.write(symbol='+'))
@@ -170,9 +194,9 @@ class Example(QMainWindow):
         self.bleft.clicked.connect(self.change_position_left)
         self.b10.clicked.connect(lambda: self.write(symbol='10^'))
         self.bdel_2.clicked.connect(self.delete)
+        self.bmod.clicked.connect(lambda: self.write(symbol='mod'))
         self.brzn.clicked.connect(lambda: self.write(symbol='-'))
         self.radio_group.buttonClicked.connect(self.change_round)
-        self.rounding = 5
 
     def write(self, symbol='0'):
         if self.label.text() not in ['Error', '0']:
@@ -199,7 +223,11 @@ class Example(QMainWindow):
         primer = self.label.text()
         a = Calculation()
         self.clear()
-        self.label.setText(check_int(float(a.main(primer, self.rounding))))
+        main_result = a.main(primer, self.rounding)
+        if main_result == 'Error':
+            self.label.setText('Error')
+        else:
+            self.label.setText(check_int(float(main_result)))
 
     def clear(self):
         self.label.setText('')
